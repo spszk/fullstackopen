@@ -1,0 +1,9 @@
+sequence Diagram
+	participant browser
+	participant server
+
+	browser->>server: 	POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+						Content-Type: JSON
+	activate server
+    server-->>browser: status code 201 created
+	deactivate server
