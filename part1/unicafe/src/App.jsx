@@ -10,7 +10,17 @@ const Header = () => {
 
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>{props.text}</button>
+    <div>
+      <ButtonLine click={() => props.setGood(props.good + 1, "Good")} text="Good" />
+      <ButtonLine click={() => props.setNeutral(props.neutral + 1, "Neutral")} text="Neutral" />
+      <ButtonLine click={() => props.setBad(props.bad + 1, "Bad")} text="Bad" />
+    </div>
+  )
+}
+
+const ButtonLine = (props) => {
+  return (
+    <button onClick={props.click}>{props.text}</button>
   )
 }
 
@@ -26,16 +36,18 @@ const Statistics = (props) => {
   } else {
     return (
       <div>
-        <p>Good: {props.good}</p>
-        <p>Neutral: {props.neutral}</p>
-        <p>Bad: {props.bad}</p>
-        <p>Total: {sum}</p>
-        <p>Average: {sum/3}</p>
-        <p>Positive: {(100 * props.good) / sum}%</p>
+        <StatisticLine value={props.good} text="Good" />
+        <StatisticLine value={props.neutral} text="Neutral" />
+        <StatisticLine value={props.bad} text="Bad" />
+        <StatisticLine value={sum} text="Total" />
+        <StatisticLine value={sum/3} text="Average" />
+        <StatisticLine value={(100 * props.good) / sum} text="Positive" pc="%" />
       </div>
     )
   }
 }
+
+const StatisticLine = (props) => <div>{props.text}: {props.value}{props.pc}</div>
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -47,14 +59,12 @@ const App = () => {
     if (t === "Bad") setBad(n)
   }
 
-  console.log(good, neutral, bad)
-
   return (
     <div>
       <Header />
-      <Button handleClick={() => setValue(good + 1, "Good")} text={"Good"} />
-      <Button handleClick={() => setValue(neutral + 1, "Neutral")} text={"Neutral"} />
-      <Button handleClick={() => setValue(bad + 1, "Bad")} text={"Bad"} />
+      <Button good={good} setGood={(n, t) => setValue(n, t)}
+        neutral={neutral} setNeutral={(n, t) => setValue(n, t)}
+        bad={bad} setBad={(n, t) => setValue(n, t)} />
       <StatsHeader />
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
