@@ -28,26 +28,43 @@ const StatsHeader = () => <div><h2>Statistics</h2></div>
 
 const Statistics = (props) => {
   const sum = props.bad + props.good + props.neutral
-
   if (props.bad === 0 && props.good === 0 && props.neutral === 0) {
     return (
       <div>No feedback given</div>
     )
   } else {
     return (
-      <div>
-        <StatisticLine value={props.good} text="Good" />
-        <StatisticLine value={props.neutral} text="Neutral" />
-        <StatisticLine value={props.bad} text="Bad" />
-        <StatisticLine value={sum} text="Total" />
-        <StatisticLine value={sum/3} text="Average" />
-        <StatisticLine value={(100 * props.good) / sum} text="Positive" pc="%" />
-      </div>
+      <table><tbody>
+        <tr>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value="Good"/></th>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value={props.good}/></th>
+        </tr>
+        <tr>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value="Neutral"/></th>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value={props.neutral}/></th>
+        </tr>
+        <tr>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value="Bad"/></th>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value={props.bad}/></th>
+        </tr>
+        <tr>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value="Total"/></th>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value={sum}/></th>
+        </tr>
+        <tr>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value="Average"/></th>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value={(sum/3).toFixed(1)}/></th>
+        </tr>
+        <tr>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value="Positive"/></th>
+          <th style={{fontWeight: 'normal', textAlign: 'left'}}><StatisticLine value={((100 * props.good) / sum).toFixed(1)} pc="%" /></th>
+        </tr>
+      </tbody></table>
     )
   }
 }
 
-const StatisticLine = (props) => <div>{props.text}: {props.value}{props.pc}</div>
+const StatisticLine = (props) => <div>{props.value}{props.pc}</div>
 
 const App = () => {
   const [good, setGood] = useState(0)
