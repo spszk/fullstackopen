@@ -2,7 +2,7 @@ import Header from './Header'
 import Parts from './Parts'
 import Total from './Total'
 
-const Courses = (props) => {
+const Course = (props) => {
     const courses = props.courses;
     return (
         <div>
@@ -17,4 +17,4 @@ const Courses = (props) => {
     )
 }
 
-export default Courses
+export default Course
