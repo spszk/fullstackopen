@@ -1,8 +1,7 @@
 import PartLine from './PartLine'
 
 const Parts = (props) => {
-    const {course} = props.course;
-    const parts = course.parts;
+    const parts = props.course.parts;
     return (
         <ul>
             <PartLine parts={parts} />

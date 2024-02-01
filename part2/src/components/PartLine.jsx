@@ -1,5 +1,5 @@
 const PartLine = (props) => {
-    const parts = props.parts
+    const parts = props.parts;
     return (
         <div>
             {parts.map(parts =>
