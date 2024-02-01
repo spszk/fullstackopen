@@ -1,9 +1,10 @@
 const Total = (props) => {
     const { course } = props.course;
     const ex = course.parts;
+    const sum = ex.reduce((s, p) => s + parseInt(p.exercises), 0)
     return (
         <div>
-            <p><b>total of {parseInt(ex[0].exercises) + parseInt(ex[1].exercises) + parseInt(ex[2].exercises)} exercises</b></p>
+            <p><b>total of {sum} exercises</b></p>
         </div>
     )
 }
