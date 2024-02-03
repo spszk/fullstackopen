@@ -14,7 +14,7 @@ const Notes = (props) => {
                             {p.name} {p.number}
                         </li>
                     )
-                } else if (filter === match) {
+                } else if (filter === match.toLowerCase() || filter === match.toUpperCase()) {
                     return (
                         <li key={p.id}>
                         {p.name} {p.number}
