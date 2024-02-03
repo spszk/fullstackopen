@@ -8,8 +8,8 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
 
-  const addPerson = (event) => {
-    event.preventDefault()
+  // adds person to phonebook
+  const addPerson = () => {
     const personObject = {
       name: newName,
       id: persons.length,
@@ -18,14 +18,28 @@ const App = () => {
     setNewName('')
   }
 
+  // changes newName
   const handleChange = (event) => {
     setNewName(event.target.value)
+  }
+
+  // checks if name exists already 
+  const checkName = (event) => {
+    event.preventDefault()
+    let isInPhonebook = false
+    for (let i = 0; i < persons.length; i++) {
+      if (newName === persons[i].name) {
+        isInPhonebook = true
+      }
+    }
+    if (isInPhonebook === true) alert(newName + ' is already in phonebook')
+    else addPerson()
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
+      <form onSubmit={checkName}>
           name: <input
             placeholder='type...'
             value={newName}
