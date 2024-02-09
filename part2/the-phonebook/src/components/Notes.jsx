@@ -1,6 +1,9 @@
 const Notes = (props) => {
     const persons = props.persons
     const filter = props.filter
+
+    console.log(props);
+
     return (
         <ul>
             {persons.map((p) => {
