@@ -2,7 +2,7 @@ const Notes = (props) => {
     const persons = props.persons
     const filter = props.filter
 
-    console.log(props);
+    console.log(persons);
 
     return (
         <ul>

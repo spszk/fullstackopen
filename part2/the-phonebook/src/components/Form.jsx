@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const Form = (props) => {
     const newName = props.newName
     const newNumber = props.newNumber
@@ -16,12 +18,17 @@ const Form = (props) => {
       const personObject = {
         name: newName,
         number: newNumber,
-        same: false,
-        id: persons.length,
+        // same: false,
+        id: (persons.length + 1).toString(),
       }
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
+
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewNumber('')
+        })
     }
 
     // checks if name exists already 
