@@ -1,4 +1,4 @@
-import axios from "axios"
+import services from "../services"
 
 const Form = (props) => {
     const newName = props.newName
@@ -18,12 +18,11 @@ const Form = (props) => {
       const personObject = {
         name: newName,
         number: newNumber,
-        // same: false,
         id: (persons.length + 1).toString(),
       }
 
-      axios
-        .post('http://localhost:3001/persons', personObject)
+      services
+        .create(personObject)
         .then(response => {
           setPersons(persons.concat(response.data))
           setNewName('')
