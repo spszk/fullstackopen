@@ -30,17 +30,28 @@ const Form = (props) => {
         })
     }
 
+    // change number
+    const changeNumber = (props) => {
+      console.log("change number", props)
+    }
+
     // checks if name exists already 
     const checkName = (event) => {
       event.preventDefault()
-      let isInPhonebook = false
-      for (let i = 0; i < persons.length; i++) {
-        if (newName === persons[i].name) {
-          isInPhonebook = true
+      
+      let i = 0
+      
+      while (i < persons.length) {
+        if (persons[i].name === newName) {
+          if (window.confirm(`Do you want to change ${newName}'s number?`)) {
+            changeNumber(persons[i])
+          }
+          break
+        } else {
+          addPerson()
         }
+        i++  
       }
-      if (isInPhonebook === true) alert(newName + ' is already in phonebook')
-      else addPerson()
     }
 
     // changes newNumber

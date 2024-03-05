@@ -3,15 +3,13 @@ import services from '../services'
 const Notes = (props) => {
     const persons = props.persons
     const filter = props.filter
+    const setPersons = props.setPersons
 
     const handleDelete = (name, id) => {
-        const selectedPerson = id
-
-        console.log(selectedPerson)
-
         if (window.confirm(`Do you really want to delete ${name} from your phonebook?`)) {
             services
-                .delete(selectedPerson)
+                .delete(id)
+                .then(() => setPersons(persons.filter((p) => p.id !== id)))
         }
     }
 
