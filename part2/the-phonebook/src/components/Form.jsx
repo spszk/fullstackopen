@@ -32,7 +32,19 @@ const Form = (props) => {
 
     // change number
     const changeNumber = (props) => {
-      console.log("change number", props)
+      const changedObject = {
+        id: props.id,
+        name: props.name,
+        number: newNumber
+      }
+      
+      services
+        .update(changedObject)
+        .then((response) => {
+          setPersons(persons.map((p) => p.id !== response.data.id ? p : changedObject))
+          setNewName('')
+          setNewNumber('')
+        })
     }
 
     // checks if name exists already 
@@ -40,17 +52,24 @@ const Form = (props) => {
       event.preventDefault()
       
       let i = 0
+      let inPhonebook = false
       
       while (i < persons.length) {
         if (persons[i].name === newName) {
-          if (window.confirm(`Do you want to change ${newName}'s number?`)) {
-            changeNumber(persons[i])
-          }
+          inPhonebook = true
           break
         } else {
-          addPerson()
+          inPhonebook = false
         }
         i++  
+      }
+
+      if (inPhonebook == true) {
+        if (window.confirm(`Do you want to change ${newName}'s number?`)) {
+          changeNumber(persons[i])
+        }
+      } else {
+        addPerson()
       }
     }
 

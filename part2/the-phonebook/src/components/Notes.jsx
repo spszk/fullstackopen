@@ -9,7 +9,9 @@ const Notes = (props) => {
         if (window.confirm(`Do you really want to delete ${name} from your phonebook?`)) {
             services
                 .delete(id)
-                .then(() => setPersons(persons.filter((p) => p.id !== id)))
+                .then(() => {
+                    setPersons(persons.filter((p) => p.id !== id))
+                })
         }
     }
 
@@ -25,7 +27,7 @@ const Notes = (props) => {
                             <button type="button" onClick={() => {handleDelete(p.name, p.id)}} >delete</button>
                         </li>
                     )
-                } else if (filter === match.toLowerCase() || filter === match.toUpperCase()) {
+                } else if (filter.toLowerCase() === match.toLowerCase()) {
                     return (
                         <li key={p.id}>
                             {p.name} {p.number + " "} 
