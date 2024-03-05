@@ -18,7 +18,7 @@ const Form = (props) => {
       const personObject = {
         name: newName,
         number: newNumber,
-        id: (persons.length + 1).toString(),
+        id: (parseInt(persons[persons.length - 1].id) + 1).toString(),
       }
 
       services
