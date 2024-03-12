@@ -7,6 +7,8 @@ const Form = (props) => {
     const setNewNumber = props.setNewNumber
     const persons = props.persons
     const setPersons = props.setPersons
+    const message = props.message
+    const setMessage = props.setMessage
 
     // changes newName
     const handleChange = (event) => {
@@ -25,6 +27,10 @@ const Form = (props) => {
         .create(personObject)
         .then(response => {
           setPersons(persons.concat(response.data))
+          setMessage(response.data.name + ' was added')
+          setTimeout(() => {
+            setMessage(null)},
+            2500)
           setNewName('')
           setNewNumber('')
         })
@@ -42,6 +48,10 @@ const Form = (props) => {
         .update(changedObject)
         .then((response) => {
           setPersons(persons.map((p) => p.id !== response.data.id ? p : changedObject))
+          setMessage(response.data.name + "'s number was changed")
+          setTimeout(() => {
+            setMessage(null)},
+            2500)
           setNewName('')
           setNewNumber('')
         })

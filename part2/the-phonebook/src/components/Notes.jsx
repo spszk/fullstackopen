@@ -4,14 +4,21 @@ const Notes = (props) => {
     const persons = props.persons
     const filter = props.filter
     const setPersons = props.setPersons
+    const message = props.message
+    const setMessage = props.setMessage
 
+    // deletes contact
     const handleDelete = (name, id) => {
         if (window.confirm(`Do you really want to delete ${name} from your phonebook?`)) {
             services
                 .delete(id)
                 .then(() => {
                     setPersons(persons.filter((p) => p.id !== id))
-                })
+                    setMessage(name + ' was deleted')
+                    setTimeout(() => {
+                        setMessage(null)},
+                        2500)
+                            })
         }
     }
 
